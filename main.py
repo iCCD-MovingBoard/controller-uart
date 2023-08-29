@@ -12,7 +12,7 @@ def main():
             # ここにコントローラーの入力を受け取る処理を書く
 
             #controller_data = '99, -3444'
-            controller_data = joycon.get()
+            controller_data: str = joycon.get()
 
             # UARTでデータを送信
             speeds: list[int] = str_converter.to_speeds(controller_data)

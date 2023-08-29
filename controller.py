@@ -30,7 +30,7 @@ class Joycon:
 		while not self.update:
 			pass
 		self.update = False
-		return (str(self.left) + ',' + str(self.right)).encode('utf-8')
+		return (str(self.left) + ',' + str(self.right))
 
 	def clamp(self, n):
 		return min(32767, max(-32768, n))
