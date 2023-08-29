@@ -11,11 +11,11 @@ def main():
         while True:
             # ここにコントローラーの入力を受け取る処理を書く
 
-            #controller_data = b'99, -3444'
+            #controller_data = '99, -3444'
             controller_data = joycon.get()
 
             # UARTでデータを送信
-            speeds = str_converter.to_speeds(controller_data)
+            speeds: list[int] = str_converter.to_speeds(controller_data)
             #print(speeds)
 
             uart.send_to_motordriver(uart.uart_port1, speeds['left'])
