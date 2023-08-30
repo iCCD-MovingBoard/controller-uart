@@ -8,7 +8,7 @@ run(f'sudo chmod 777 {jetson_port1}', shell=True)
 run(f'sudo chmod 777 {jetson_port2}', shell=True)
 
 BAUDRATE = 9600
-TIMEOUT = 0
+TIMEOUT = 0.01
 STOPBITS = serial.STOPBITS_ONE
 PARITY = serial.PARITY_NONE
 BYTESIZE = serial.EIGHTBITS
