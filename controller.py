@@ -11,7 +11,6 @@ class Joycon:
 		self.right = 0
 		self.t = threading.Thread(target = self.loop)
 		self.t.start()
-		self.update = True
 
 	def loop(self):
 		while True:
@@ -24,12 +23,8 @@ class Joycon:
 					self.y = value
 				self.left = self.clamp(self.x - self.y)
 				self.right = self.clamp(-self.x - self.y)
-				self.update = True
 				#print(self.left, self.right, sep = ',')
 	def get(self):
-		while not self.update:
-			pass
-		self.update = False
 		return (str(self.left) + ',' + str(self.right))
 
 	def clamp(self, n):
