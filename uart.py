@@ -27,21 +27,22 @@ uart_port2 = serial.Serial(jetson_port2,
                             parity=PARITY,
                             bytesize=BYTESIZE)
 
-# -32767 ~ 32767の範囲の値を-63 ~ 63の範囲に変換する
+# 0 ~ 32767の範囲の値を 0 ~ 256の範囲に変換する
 def scale_speed(speed):
     CONTROLLER_MAX_VALUE = 32767
-    UART_MAX_VALUE = 63
+    UART_MAX_VALUE = 255
     CONV_RATE = UART_MAX_VALUE / CONTROLLER_MAX_VALUE
     speed = int(speed * CONV_RATE)
+    if speed < 0: speed = 0
     return speed
 
 def send_to_motordriver(port, speed:int):
     scaled_speed = scale_speed(speed)
-    unsigned_speed = scaled_speed + 63
     # print(f'speed: {speed}, unsigned_speed: {unsigned_speed}, type:{type(unsigned_speed)}')
-    port.write(bytes([255]))
-    port.write(bytes([unsigned_speed]))
-    port.write(bytes([240]))
+    
+    # port.write(bytes([255]))
+    port.write(bytes([scaled_speed]))
+    # port.write(bytes([240]))
     
 
 def main():
